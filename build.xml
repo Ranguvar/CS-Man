@@ -45,7 +45,7 @@
 	</target>
 	
 	<target name="clean">
-		<!-- <delete dir="${bin}"/> -->
+		<delete dir="${bin}"/>
 		<delete dir="${dist}"/>
 	</target>
 	
