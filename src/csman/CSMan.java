@@ -23,11 +23,32 @@
 
 package csman;
 
-public class CSMan
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+public class CSMan extends JFrame
 {
+	public static final Dimension RESOLUTION = new Dimension(448, 576);
+	
+	public CSMan()
+	{
+		setTitle("CS-Man");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(RESOLUTION);
+		setLocationRelativeTo(null);  // Center the window
+		setVisible(true);
+	}
+	
 	public static void main(String[] args)
 	{
-		System.out.println("hello, world");
+		SwingUtilities.invokeLater(new Runnable() {
+                        @SuppressWarnings("unused")
+                        public void run()
+			{
+				new CSMan();
+			}
+		});
 	}
-
 }
