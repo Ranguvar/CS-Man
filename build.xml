@@ -24,7 +24,7 @@
 	
 	<property name="src" location="src"/>
 	<property name="bin" location="bin"/>
-	<property name="dist" location="dist"/>
+	<property name="jar" location="csman.jar"/>
 	
 	<target name="init">
 		<tstamp/>
@@ -36,8 +36,7 @@
 	</target>
 	
 	<target name="dist" depends="compile">
-		<mkdir dir="${dist}"/>
-		<jar jarfile="${dist}/csman.jar" basedir="${bin}">
+		<jar jarfile="${jar}" basedir="${bin}">
 			<manifest>
 				<attribute name="Main-Class" value="csman.CSMan"/>
 			</manifest>
@@ -46,7 +45,7 @@
 	
 	<target name="clean">
 		<delete dir="${bin}"/>
-		<delete dir="${dist}"/>
+		<delete file="${jar}"/>
 	</target>
 	
 </project>
