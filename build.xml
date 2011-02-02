@@ -32,7 +32,7 @@
 	
 	<target name="compile" depends="init">
 		<mkdir dir="${bin}"/>
-		<javac srcdir="${src}" destdir="${bin}"/>
+		<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="false"/>
 	</target>
 	
 	<target name="dist" depends="compile">
