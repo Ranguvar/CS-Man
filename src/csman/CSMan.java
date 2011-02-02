@@ -22,21 +22,35 @@
 package csman;
 
 import java.awt.Dimension;
+import java.awt.Canvas;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
 public class CSMan extends JFrame
 {
-	private static final long serialVersionUID = 1L;
 	public static final Dimension RESOLUTION = new Dimension(448, 576);
+	private static final long serialVersionUID = 1L;
 
 	public CSMan()
 	{
 		setTitle("CS-Man");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(RESOLUTION);
 		setLocationRelativeTo(null);  // Center the window
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		JMenu fileMenu = menuBar.add(new JMenu("File"));
+		JMenuItem fileMenuExit = fileMenu.add(new JMenuItem("Exit"));
+		
+		Canvas gameScreen = new Canvas();
+		gameScreen.setSize(RESOLUTION);
+		getContentPane().add(gameScreen);
+		
+		pack();
 		setVisible(true);
 	}
 
