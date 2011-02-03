@@ -23,11 +23,18 @@ package csman;
 
 import java.awt.Dimension;
 import java.awt.Canvas;
+import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.SwingUtilities;
 
 public class CSMan extends JFrame
@@ -38,18 +45,76 @@ public class CSMan extends JFrame
 	public CSMan()
 	{
 		setTitle("CS-Man");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);  // Center the window
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+
 		JMenu fileMenu = menuBar.add(new JMenu("File"));
 		JMenuItem fileMenuExit = fileMenu.add(new JMenuItem("Exit"));
-		
+		fileMenuExit.addActionListener(new ActionListener()
+		{
+			/*
+			 * FIXME: This just closes all windows at the moment.
+			 * There has to be a good way to just close the window that fired the event.
+			 */
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				for (Frame frame : JFrame.getFrames())
+					if (frame.isActive()) {
+						WindowEvent windowClosing = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+						Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(windowClosing);
+					}
+			}
+		});
+
+		/*
+		 * Display a menu of possible `Look and Feel' options the user has.
+		 * This is mostly for learning and testing purposes.
+		 */
+		JMenu lafMenu = menuBar.add(new JMenu("LAF"));
+		try {
+			/*
+			 * Iterate through available LAFs, and present them as menu items which
+			 * activate said LAF when selected.
+			 *
+			 * `laf' needs to be declared final to allow access from the ActionListener anonymous subclass.
+			 * FIXME: That still doesn't make sense.
+			 */
+			for (final LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels()) {
+				JMenuItem lafMenuItem = lafMenu.add(new JMenuItem(laf.getName()));
+				lafMenuItem.addActionListener(new ActionListener()
+				{
+					// When the menu item is selected, change the LookAndFeel, and apply the change to all frames.
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						try {
+							UIManager.setLookAndFeel(laf.getClassName());
+							for (Frame frame : JFrame.getFrames())
+								if (frame.isActive()) {
+									SwingUtilities.updateComponentTreeUI(frame);
+									frame.pack();
+								}
+						} catch (Exception eAction) {
+							System.out.println("error: " + eAction);
+							System.exit(1);
+						}
+					}
+				});
+			}
+		} catch (Exception e) {
+			System.out.println("error: " + e);
+			System.exit(1);
+		}
+		setJMenuBar(menuBar);
+
 		Canvas gameScreen = new Canvas();
-		gameScreen.setSize(RESOLUTION);
 		getContentPane().add(gameScreen);
-		
+		gameScreen.setSize(RESOLUTION);
+
 		pack();
 		setVisible(true);
 	}
