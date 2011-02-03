@@ -124,7 +124,6 @@ public class CSMan extends JFrame
 		SwingUtilities.invokeLater(new Runnable()
 		{
 			@Override
-			@SuppressWarnings("unused")
 			public void run()
 			{
 				new CSMan();
