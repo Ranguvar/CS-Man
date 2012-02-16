@@ -1,7 +1,7 @@
 /*
  * Pac-Man clone written in Java.
  *
- * Copyright (c) 2010 Devin Cofer <ranguvar@archlinux.us>
+ * Copyright (c) 2012 Devin Cofer <ranguvar@archlinux.us>
  * This file is part of CS-Man.
  *
  * CS-Man is free software: you can redistribute it and/or modify

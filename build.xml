@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Ant build file for CS-Man.
 
-     Copyright (c) 2010 Devin Cofer <ranguvar@archlinux.us>
+     Copyright (c) 2012 Devin Cofer <ranguvar@archlinux.us>
      This file is part of CS-Man.
 
      CS-Man is free software: you can redistribute it and/or modify
@@ -17,23 +18,23 @@
      along with CS-Man; see the file COPYING.  If not, see
      <http://www.gnu.org/licenses/>.
 -->
-	
+
 <project name="CS-Man" default="dist" basedir=".">
 	<description>Ant build file for CS-Man</description>
-	
+
 	<property name="src" location="src"/>
 	<property name="bin" location="bin"/>
 	<property name="jar" location="csman.jar"/>
-	
+
 	<target name="init">
 		<tstamp/>
 	</target>
-	
+
 	<target name="compile" depends="init">
 		<mkdir dir="${bin}"/>
 		<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="false"/>
 	</target>
-	
+
 	<target name="dist" depends="compile">
 		<jar jarfile="${jar}" basedir="${bin}">
 			<manifest>
@@ -41,10 +42,10 @@
 			</manifest>
 		</jar>
 	</target>
-	
+
 	<target name="clean">
 		<delete dir="${bin}"/>
 		<delete file="${jar}"/>
 	</target>
-	
+
 </project>
