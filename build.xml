@@ -24,7 +24,7 @@
 
 	<property name="src" location="src"/>
 	<property name="bin" location="bin"/>
-	<property name="jar" location="csman.jar"/>
+	<property name="jar" location="bin/csman.jar"/>
 
 	<target name="init">
 		<tstamp/>
