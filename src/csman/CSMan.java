@@ -25,13 +25,13 @@ import java.awt.Dimension;
 import java.awt.Canvas;
 import java.awt.Frame;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -52,20 +52,14 @@ public class CSMan extends JFrame
 
 		JMenu fileMenu = menuBar.add(new JMenu("File"));
 		JMenuItem fileMenuExit = fileMenu.add(new JMenuItem("Exit"));
+		final JFrame frame = this;
 		fileMenuExit.addActionListener(new ActionListener()
 		{
-			/*
-			 * FIXME: This just closes all windows at the moment.
-			 * There has to be a good way to just close the window that fired the event.
-			 */
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				for (Frame frame : JFrame.getFrames())
-					if (frame.isActive()) {
-						WindowEvent windowClosing = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
-						Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(windowClosing);
-					}
+				WindowEvent windowClosing = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+				Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(windowClosing);
 			}
 		});
 
@@ -126,6 +120,7 @@ public class CSMan extends JFrame
 			@Override
 			public void run()
 			{
+				new CSMan();
 				new CSMan();
 			}
 		});
