@@ -46,7 +46,6 @@ public class CSMan extends JFrame
 	{
 		setTitle("CS-Man");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);  // Center the window
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -116,6 +115,7 @@ public class CSMan extends JFrame
 		gameScreen.setSize(RESOLUTION);
 
 		pack();
+		setLocationRelativeTo(null);  // Center the window
 		setVisible(true);
 	}
 
